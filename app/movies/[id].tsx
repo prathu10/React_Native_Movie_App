@@ -9,4 +9,4 @@ const MovieDetails = () => {
     )
 }
 export default MovieDetails
-// const styles = StyleSheet.create({})
+const styles = StyleSheet.create({})
