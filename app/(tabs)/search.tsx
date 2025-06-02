@@ -6,7 +6,7 @@ import {fetchMovies} from "@/services/api";
 import MovieCard from "@/components/MovieCard";
 import {icons} from "@/assets/icons";
 import SearchBar from "@/components/SearchBar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 
@@ -15,10 +15,19 @@ const Search = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
 
-    const {data: movies, loading, error } = useFetch(() => fetchMovies( {query: searchQuery}), false )
+    const {data: movies, loading, error, refetch: loadMovies,reset} = useFetch(() => fetchMovies( {query: searchQuery}) )
 
+    useEffect(() => {
+        const timeoutId =setTimeout(async () => {
+            if (searchQuery.trim()) {
+                await loadMovies();
+            } else {
+                reset();
+            }
+        }, 400);
+        return () => clearTimeout(timeoutId);
 
-   
+    }, [searchQuery]);
 
 
     return (
