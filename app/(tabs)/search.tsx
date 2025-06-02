@@ -15,7 +15,7 @@ const Search = () => {
     const [searchQuery, setSearchQuery] = useState('');
 
 
-    const {data: movies, loading, error } = useFetch(() => fetchMovies( {query: ''}), )
+    const {data: movies, loading, error } = useFetch(() => fetchMovies( {query: searchQuery}), false )
 
 
    
@@ -44,7 +44,10 @@ const Search = () => {
                             </View>
 
                             <View className="my-5">
-                            <SearchBar placeholder="Search for movies, TV shows and more" />
+                                <SearchBar
+                                    placeholder="Search for movies, TV shows and more" value={searchQuery} onChangeText={(text: string) => setSearchQuery(text)}
+
+                                />
                             </View>r
 
                             {loading && (
@@ -58,10 +61,10 @@ const Search = () => {
                                 </Text>
                             )}
 
-                            {!loading && !error && 'SEARCH QUERY'.trim() && movies?.length > 0 && (
+                            {!loading && !error && searchQuery.trim() && movies?.length > 0 && (
                                 <Text className="text-xl text-white font-bold">
                                     Search Results for {' '}
-                                    <Text className="text-accent">SEARCH QUERY</Text>
+                                    <Text className="text-accent">{searchQuery}</Text>
 
                                 </Text>
 
