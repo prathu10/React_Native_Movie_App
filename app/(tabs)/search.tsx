@@ -19,11 +19,14 @@ const Search = () => {
     const {data: movies, loading, error, refetch: loadMovies,reset} = useFetch(() => fetchMovies( {query: searchQuery}) )
 
     useEffect(() => {
-        updateSearchCount(searchQuery, movies[0]);
 
         const timeoutId =setTimeout(async () => {
             if (searchQuery.trim()) {
                 await loadMovies();
+
+                if(movies?.length > 0 && movies?.[0])
+                await updateSearchCount(searchQuery, movies[0]);
+
             } else {
                 reset();
             }
