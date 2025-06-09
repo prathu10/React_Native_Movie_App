@@ -31,7 +31,7 @@ A cross-platform mobile app built with **React Native** and **Expo** that lets u
 
 bash:
 # Clone the repo
-git clone https://github.com/your-username/react-native-movie-app.git
+git clone https://github.com/prathu10/React_Native_Movie_App.git
 cd react-native-movie-app
 
 # Install dependencies
