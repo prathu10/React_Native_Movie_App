@@ -2,11 +2,12 @@ import {ActivityIndicator, FlatList, Image, StyleSheet, Text, View} from 'react-
 import {images} from "@/constants/images";
 import useFetch from "@/services/useFetch";
 import {fetchMovies} from "@/services/api";
-
 import MovieCard from "@/components/MovieCard";
 import {icons} from "@/assets/icons";
 import SearchBar from "@/components/SearchBar";
 import {useEffect, useState} from "react";
+import {updateSearchCount} from "@/services/appwrite";
+
 
 
 
@@ -18,6 +19,8 @@ const Search = () => {
     const {data: movies, loading, error, refetch: loadMovies,reset} = useFetch(() => fetchMovies( {query: searchQuery}) )
 
     useEffect(() => {
+        updateSearchCount(searchQuery, movies[0]);
+
         const timeoutId =setTimeout(async () => {
             if (searchQuery.trim()) {
                 await loadMovies();
@@ -79,6 +82,16 @@ const Search = () => {
 
                             )}
                         </>
+
+                      }
+
+                      ListEmptyComponent={
+                            !loading && !error ? (
+                                <View className="mt-10 px-5">
+                                    <Text className="text-center text-gray-500">{searchQuery.trim() ? 'No movies found' : 'Search for a movie'}</Text>
+                                </View>
+
+                            ) : null
 
                       }
 
