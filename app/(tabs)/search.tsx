@@ -25,7 +25,8 @@ const Search = () => {
                 await loadMovies();
 
                 if(movies?.length > 0 && movies?.[0])
-                await updateSearchCount(searchQuery, movies[0]);
+                    await updateSearchCount(searchQuery, movies[0]);
+
 
             } else {
                 reset();
@@ -63,7 +64,7 @@ const Search = () => {
                                     placeholder="Search for movies, TV shows and more" value={searchQuery} onChangeText={(text: string) => setSearchQuery(text)}
 
                                 />
-                            </View>r
+                            </View>
 
                             {loading && (
                                 <ActivityIndicator size="large" color="#0000ff" className="my-3" />
@@ -78,9 +79,7 @@ const Search = () => {
 
                             {!loading && !error && searchQuery.trim() && movies?.length > 0 && (
                                 <Text className="text-xl text-white font-bold">
-                                    Search Results for {' '}
-                                    <Text className="text-accent">{searchQuery}</Text>
-
+                                    {`Search Results for ${searchQuery}`}
                                 </Text>
 
                             )}

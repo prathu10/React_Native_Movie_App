@@ -17,8 +17,6 @@ const database = new Databases(client);
 export const updateSearchCount = async (query: string, movie: Movie) => {
 
     try {
-
-
         const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
             Query.equal('searchTerm', query)
         ])
@@ -34,15 +32,18 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
                 COLLECTION_ID,
                 existingMovie.$id,
                 {
-                    count: existingMovie.$count + 1,
+                    count: existingMovie.count + 1,
                 }
             )
+
+            // If no such document exists, create a new one
         } else {
             await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
 
                 searchTerm: query,
                 movie_id: movie.id,
                 count: 1,
+                title: movie.title,
                 poster_url: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
 
 
