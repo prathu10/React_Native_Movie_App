@@ -4,6 +4,9 @@ import useFetch from "@/services/useFetch";
 import {fetchMovieDetails} from "@/services/api";
 import {router, useLocalSearchParams} from "expo-router";
 import {icons} from "@/constants/icons";
+import { useState, useEffect } from 'react';
+import { account, database, ID, Query } from '@/services/appwrite';
+
 
 interface MovieInfoProps {
     label: string;
@@ -18,6 +21,8 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
 )
 
 const MovieDetails = () => {
+
+
 
     const {id} = useLocalSearchParams();
 

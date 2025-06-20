@@ -1,5 +1,6 @@
-import {Client, Databases, Query} from "react-native-appwrite";
-import { ID } from "react-native-appwrite";
+import {Client, Databases, Query, Account, ID} from "react-native-appwrite";
+
+
 
 //track the searches made by a user
 
@@ -11,7 +12,7 @@ const client = new Client()
     .setEndpoint('https://cloud.appwrite.io/v1')
     .setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!)
 
-const database = new Databases(client);
+// const database = new Databases(client);
 
 export const updateSearchCount = async (query: string, movie: Movie) => {
 
@@ -75,3 +76,9 @@ export const getTrendingMovies = async (): Promise<TrendingMovie[] | undefined> 
         return undefined;
     }
 }
+
+export const account = new Account(client);
+// @ts-ignore
+export const database = new Databases(client);
+export { ID, Query };
+
